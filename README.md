@@ -1,4 +1,4 @@
-# tindev
+# tindevs
 
 Project created as per Omnistack Week #8 course
 
