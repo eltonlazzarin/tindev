@@ -1,16 +1,14 @@
-const express = require('express'); // importando o express
-const DevController = require('./controllers/DevController'); // importando arquivo DevController
+const express = require('express');
+const DevController = require('./controllers/DevController');
+const LikeController = require('./controllers/LikeController');
+const DislikeController = require('./controllers/DislikeController');
 
-const routes = express.Router(); // função dentro do express
+const routes = express.Router();
 
-/* Rota com o metodo get que não vamos usar
-routes.get('/', (req, res) => { // chamada de rota no navegador (URL) - neste caso localhost:3333 para requisições e resposta. (req, res) => é uma arrow function
-    return res.json({ message: `Hello ${req.query.name}` });
-});
-*/
+routes.get('/devs', DevController.index);
+routes.post('/devs', DevController.store);
 
-// cadastrando um novo desenvolvedor dentro da aplicação
-routes.post('/devs', DevController.store);  
+routes.post('/devs/:devId/likes', LikeController.store);
+routes.post('/devs/:devId/dislikes', DislikeController.store);
 
-// exportando as rotas para outros arquivos
-module.exports = routes; // routes aqui é uma variável
+module.exports = routes;

@@ -1,30 +1,43 @@
-const axios = require('axios'); // importando axios
-const Dev = require('../models/Dev'); // importando Dev
+const axios = require('axios');
+const Dev = require('../models/Dev');
 
-// criar um desenvolvedor pelo metodo store
 module.exports = {
-    async store(req, res) {
-        const { username } = req.body;
-        
-        // validar se o usuario ja existe
-        const userExists = await Dev.findOne({ user: username });
+  async index(req, res) {
+    const { user } = req.headers;
 
-        if (userExists) {
-            return res.json(userExists);
-        }
+    const loggedDev = await Dev.findById(user);
 
-        // como a requisição é assincrona (demora que retornar) temos que usar await, execute a linha toda, depois as demais linhas abaixo e quando usamos await somos obrigado a usar o async antes do metodo, neste caso o metodo store(req, res);
-        const response = await axios.get(`https://api.github.com/users/${username}`);
+    const users = await Dev.find({
+      $and: [
+        { _id: { $ne: user } },
+        { _id: { $nin: loggedDev.likes } },
+        { _id: { $nin: loggedDev.dislikes } },
+      ],
+    })
 
-        const { name, bio, avatar_url } = response.data;
+    return res.json(users);
+  },
 
-        const dev = await Dev.create({
-            name,
-            user: username,
-            bio,
-            avatar: avatar_url
-        })
+  async store(req, res) {
+    const { username } = req.body;
 
-        return res.json(dev); // retorna os dados do usuário no GITHUB
+    const userExists = await Dev.findOne({ user: username });
+
+    if (userExists) {
+      return res.json(userExists);
     }
+
+    const response = await axios.get(`https://api.github.com/users/${username}`);
+
+    const { name, bio, avatar_url: avatar } = response.data;
+
+    const dev = await Dev.create({
+      name,
+      user: username,
+      bio,
+      avatar
+    })
+
+    return res.json(dev);
+  }
 };

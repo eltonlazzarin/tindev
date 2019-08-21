@@ -1,23 +1,29 @@
-const { Schema, model } = require('mongoose'); // importando dependencias dentro do objeto mongoose
+const { Schema, model } = require('mongoose');
 
-// estrutura (schema) da tabela para armazenar um desenvolvedor na tabela
 const DevSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    user: {
-        type: String,
-        required: true,
-    },
-    bio: String,
-    avatar: {
-        type:String,
-        required: true,
-    },
+  name: {
+    type: String,
+    required: true,
+  },
+  user: {
+    type: String,
+    required: true,
+  },
+  bio: String,
+  avatar: {
+    type: String,
+    required: true,
+  },
+  likes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Dev',
+  }],
+  dislikes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Dev',
+  }],
 }, {
-    timestamps: true,
-}); 
+  timestamps: true,
+});
 
-// exportar o model com os dados acima
 module.exports = model('Dev', DevSchema);
