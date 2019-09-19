@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
       <TextInput 
         autoCapitalize="none"
         autoCorrect={false}
-        placeholder="Digite seu usuário no Github"
+        placeholder="Enter your Github username"
         placeholderTextColor="#999"
         style={styles.input}
         value={user}
@@ -46,7 +46,7 @@ export default function Login({ navigation }) {
       />
 
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Enviar</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
