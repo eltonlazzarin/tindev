@@ -73,7 +73,7 @@ export default function Main({ navigation }) {
 
       <View style={styles.cardsContainer}>
         { users.length === 0
-          ? <Text style={styles.empty}>Acabou :(</Text>
+          ? <Text style={styles.empty}>Ended :(</Text>
           : (
             users.map((user, index) => (
               <View key={user._id} style={[styles.card, { zIndex: users.length - index }]}>
@@ -107,7 +107,7 @@ export default function Main({ navigation }) {
           <Text style={styles.matchBio}>{matchDev.bio}</Text>
 
           <TouchableOpacity onPress={() => setMatchDev(null)}>
-            <Text style={styles.closeMatch}>FECHAR</Text>
+            <Text style={styles.closeMatch}>CLOSE</Text>
           </TouchableOpacity>
         </View>
       ) }
