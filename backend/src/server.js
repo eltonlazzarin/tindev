@@ -16,7 +16,7 @@ io.on('connection', socket => {
   connectedUsers[user] = socket.id;
 });
 
-mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-jxhrd.mongodb.net/omnistack8?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://USER:PASSWORD@cluster0-jxhrd.mongodb.net/omnistack8?retryWrites=true&w=majority', {
   useNewUrlParser: true
 });
 
