@@ -1,4 +1,4 @@
-# tindev - A Full Stack Project App 
+# tindev - A Full Stack Project App
 
 ### Project made with NodeJS, React and React Native
 
